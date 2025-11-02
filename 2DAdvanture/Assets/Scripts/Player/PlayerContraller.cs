@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [Header("基本参数")]
     public float speed;
     private float runSpeed;
-    private float walkSpeed => speed / 2.5f; 
+    private float walkSpeed => speed / 2.7f; 
     public float jumpForce;
 
     private void Awake()
@@ -62,8 +62,10 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
+    //移动方法
     private void Move()
     {
+        //Player的刚体组件中的速度，等于算出的速度（speed * 输入的x值 ， rb自己的y速度）
         rb.velocity = new Vector2(speed * Time.deltaTime * inputDirection.x, rb.velocity.y);
 
         int faceDir = (int)transform.localScale.x;
@@ -73,9 +75,11 @@ public class PlayerController : MonoBehaviour
         if (inputDirection.x < 0)
             faceDir = -1;
 
+        //根据运动方向，改变Player面部朝向
         transform.localScale = new Vector3(faceDir, 1, 1);
     }
 
+    //跳跃方法（通过施加力）
     private void Jump(InputAction.CallbackContext obj)
     {
         if (pc.isGround)

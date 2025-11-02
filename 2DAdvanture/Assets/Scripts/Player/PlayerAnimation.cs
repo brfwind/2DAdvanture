@@ -8,6 +8,7 @@ public class PlayerAnimation : MonoBehaviour
     private Rigidbody2D rb;
     private PhysicsCheck pc;
 
+    //获取组件
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -15,11 +16,13 @@ public class PlayerAnimation : MonoBehaviour
         pc = GetComponent<PhysicsCheck>();
     }
 
+    //实时检测更新动画转变参数
     private void Update()
     {
         SetAnimation();
     }
 
+    //将参数与Player物理参数联系
     public void SetAnimation()
     {
         anim.SetFloat("velocityX", Mathf.Abs(rb.velocity.x));
